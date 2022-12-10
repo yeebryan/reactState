@@ -1,6 +1,11 @@
     // Step 1. Setup Form + 1-Way BINDING
     // Step 2. Setup Function for each input
     // Step 3. Radio Buttons remember to modify checked attribute
+    //         - Leave value to the value of the radio btn same as html
+    // Step 4. Test Form
+    // Step 5. Set Up 2-Way BINDING
+    // Step 6. Set Up Submit Button
+    // Step 7. Set Up Disabled for Submit
 
 import React from 'react';
 
@@ -16,7 +21,7 @@ lastName:"",
 enquiry: "",
 //prepare for our conditional rendering later 
 // when the button is pressed
-btnPressed:""
+btnPressed: false
 
 };
 
@@ -56,11 +61,20 @@ updateEnquiry = (event) => {
 }
 
 submit = () => {
-    alert("hey submitted")
+    console.log('submitted');
+    alert(`Firstname: ${this.state.firstName} and Lastname: ${this.state.lastName} `);
 }
 
+// to check if button enable or not
+// just have to check if there is any value/state that is return to me
 checkIfDisabled(){
-
+    // we are checking if it doesn't return firstname, lastname and enquiry
+    // do a console log
+    return !(
+        this.state.firstName &&
+        this.state.lastName &&
+        this.state.enquiry 
+    )
 }
 //render always has return
 // returns JSX elements
@@ -79,14 +93,14 @@ render(){
         <label>First name:</label>
         <input type="text" 
         value={this.state.firstName}
-        onchange={this.updateFirstName} />
+        onChange={this.updateFirstName} />
     </div>
     {/*set up Last name*/}
     <div>
         <label>Last name:</label>
         <input type="text" 
         value={this.state.lastName}
-        onchange={this.updateLastName} />
+        onChange={this.updateLastName} />
     </div>
     {/*set up various radio buttons for Enquiry*/}
 
@@ -124,9 +138,9 @@ render(){
         <label>Social Media</label>
     </div>
     <div>
-        <button onClick={this.submit} disabled={this.checkIfDisabled}>
-            Send!!{" "}
-        </button>
+        
+        {/* Important to have () in the function */}
+    <button onClick={this.submit} disabled={this.checkIfDisabled()}>Submit</button>
     </div>
 
 
