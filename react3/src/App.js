@@ -1,9 +1,10 @@
 
-import Contactform from 
+import ContactForm from "./ContactForm";
+
 function App() {
   return (
     <div>
-      <Contactus2/>
+      <ContactForm/>
     </div>
   );
 }
