@@ -22,7 +22,7 @@
     import React from 'react';
 
 
-    export default class ContactForm extends React.Component{
+    export default class FormCheckBox extends React.Component{
     
     // create state variable
 
@@ -105,19 +105,91 @@
         // let's see what happens under the hood
         console.log("event.target.name:", event.target.name)
         // retrieves the "name" of that element (an input field name).
-        console.log("event.target.value:", event.target.value)
+        // whatever input/selection is done to element will print out element's name
+        console.log("event.target.value 123:", event.target.value)
         // retrieves the value of that element (an input field value).
+        // whatever input/selection done will print out value of elements
 
         // never bind yet, haven't update all the state values
 
         // we tap onto array [] feature, this means key will be inside variable
-
+        // [] -> produces the end-result/value of item inside
+        // e.g. [event.target.name] --> end result of event.target.name -> which is the name of the form element
+        // hence it becomes -> form element name: form element value
+        
         this.setState({
             [event.target.name] : event.target.value
             // what this means is our aim is based on target.name, whichever target name such as
             // "firstname", "lastname", "enquiry" will assign to the target.value
         })
     };
+
+    // BIND CHECKBOX so can check the CHECKBOX
+    // First thing we can do is SETSTATE
+    // There are different ways
+    // 1 way: add it to the array and remove it later
+
+    updateInterest = (event) => {
+        console.log(`event.target.value haha 123: ${event.target.value}`);
+        // CHECKING INTEREST IF IT INCLUDE THE VALUE
+        if(this.state.interest.includes(event.target.value) === false){
+            // CLONE THE ARRAY (INTEREST). 
+            // Because in React, we are dealing with functional programming, 
+            // React don't like us changing VALUES or reassign
+            // PUSH IT INSIDE THE FORM
+            // METHOD 1
+
+            let cloned = this.state.interest.slice();
+            console.log(`the clone array: ${cloned}`)
+            // slice() - empty bracket means return all elements in array
+            // Slice itself, return a copy of the array
+
+            // Change the CLONE array
+            // push stuffs/values into CLONED
+
+            cloned.push(event.target.value);
+            console.log(`push shown into cloned array: ${cloned}`)
+
+            // SWAP out original array with CLONE
+            this.setState({
+                interest: cloned // interest replace with CLONED
+            })
+
+        }else{
+            // if the checkbox value is already in the array, it means it has been checked
+            // so we have to remove existing one
+            console.log('removing ...', event.target.value);
+            // event.target.value here is what is unchecked
+            // how to set up removal once user uncheck the box
+
+            // process repeat -> clone -> change -> swap
+
+            // remove item in checkbox array
+            // SLICE - return selected elements in an array as new array
+            // CLONE array again in order to remove item
+            let cloned = this.state.interest.slice();
+            // haven't remove unchecked item yet
+
+            // find particular one to remove
+            // we know that it is an array, we can manipulate it using the index that was clicked on
+            
+            // what findIndex do is, it return the index we trying to search for the targeted value
+            let itemToRemove = cloned.findIndex(function(pikachu){
+                return pikachu === event.target.value // pikachu refers to element
+                // find the 1 that was unchecked, the one unchecked means event.target.value --> return the index
+            })
+        
+            // Index is found, so modify array 'state'
+            // It will show in console but not in the chrome's component
+            // currently copy state.interest (currently being checked items)
+            console.log(`return me index: ${itemToRemove}`);
+
+            // remove item; splice - add/remove array elements
+            cloned.splice(itemToRemove, 1);
+            this.setState({
+                interest: cloned
+            })
+    }}
 
 
 
@@ -164,6 +236,7 @@
                     <li>Last name: {this.state.lastName}</li>
                     <li>Enquiry name: {this.state.enquiry}</li>
                     <li>Source name: {this.state.source}</li>
+                    <li>Fruits selection: {this.state.interest}</li>
                 </ul>
                 </React.Fragment>
             )
@@ -253,29 +326,36 @@
               </select>
         </div>
         {/* CHECKBOX */}
-        {/* CHECKED */}
+        {/* IF you can't check the checkbox means BINDING haven't been set up */}
+        {/* set up onChange, remember includes is SQUARE BRACKETS since array*/}
+        {/* But if you just update onChange with 'updateInterest', you will be under Chrome's component when you ticked the element, it won't reflect in the state>interest */}
+        {/* SO LET'S SETUP THE BINDING! */}
         <div>
             <label>Fruits:</label>
             {/* Apple */}
             <input type="checkbox" 
-            name="fruits" 
-            value="apple" checked={this.state.fruits.includes('apple')}/>Apple
+            name="interest" 
+            value="apple" checked={this.state.interest.includes['apple']}
+            onChange={this.updateInterest}/>Apple
 
             {/* Orange */}
             <input type="checkbox" 
-            name="fruits" 
-            value="orange" checked={this.state.fruits.includes('orange')}/>Orange
+            name="interest" 
+            value="orange" checked={this.state.interest.includes['orange']}
+            onChange={this.updateInterest}/>Orange
 
             {/* Pineapple */}
             <input type="checkbox" 
-            name="fruits" 
-            value="pineapple" checked={this.state.fruits.includes('pineapple')}/>Pineapple
+            name="interest" 
+            value="pineapple" checked={this.state.interest.includes['pineapple']}
+            onChange={this.updateInterest}/>Pineapple
 
             {/* Durian */}
             <input 
             type="checkbox" 
-            name="fruits" 
-            value="durian" checked={this.state.fruits.includes('durian')}/>Durian
+            name="interest" 
+            value="durian" checked={this.state.interest.includes['durian']}
+            onChange={this.updateInterest}/>Durian
         </div>
 
         {/* BUTTON */}
