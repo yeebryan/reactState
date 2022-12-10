@@ -215,7 +215,8 @@
             this.state.firstName &&
             this.state.lastName &&
             this.state.enquiry &&
-            this.state.source
+            this.state.source &&
+            this.state.interest // how to separate each element with comma
         )
     }
     //render always has return
