@@ -16,9 +16,10 @@ export default class ContactForm extends React.Component{
 state = {
 
 // create state variable
-firstName: "",
-lastName:"",
-enquiry: "",
+firstName: "", // text input
+lastName:"", // text input
+enquiry: "", // radio
+source: "", // dropdown list
 //prepare for our conditional rendering later 
 // when the button is pressed
 btnPressed: false
@@ -60,11 +61,25 @@ updateEnquiry = (event) => {
     })
 }
 
-submit = () => {
-    console.log('submitted');
-    alert(`Firstname: ${this.state.firstName} and Lastname: ${this.state.lastName} `);
+
+updateSource= (event) => {
+    this.setState({
+        source: event.target.value
+    })
 }
 
+// once user submitted form, set pressed status to true
+submit = () => {
+    console.log('submitted');
+    //alert(`Firstname: ${this.state.firstName} and Lastname: ${this.state.lastName} `);
+    // change the state of the button using btnPressed 
+    this.setState({
+        btnPressed: true
+    })
+
+}
+
+// conditional rendering to check if there's any value in our form
 // to check if button enable or not
 // just have to check if there is any value/state that is return to me
 checkIfDisabled(){
@@ -73,12 +88,38 @@ checkIfDisabled(){
     return !(
         this.state.firstName &&
         this.state.lastName &&
-        this.state.enquiry 
+        this.state.enquiry &&
+        this.state.source
     )
 }
 //render always has return
 // returns JSX elements
 // JSX looks like HTML
+// summary of details will be show in renderSummary
+
+renderSummary(){
+    // only return the JSX only when the button is pressed
+    // display summary of info user keyed in
+    if(this.state.btnPressed){
+        // what we can return
+        return (
+            <React.Fragment>
+                <h2>Summary of Details</h2>
+            <ul>
+                <li>First name: {this.state.firstName}</li>
+                <li>Last name: {this.state.lastName}</li>
+                <li>Enquiry name: {this.state.enquiry}</li>
+                <li>Source name: {this.state.source}</li>
+            </ul>
+            </React.Fragment>
+        )
+    }
+}
+
+
+
+
+// RENDER CORNER //
 
 render(){
     // set up UI inside React Fragment
@@ -128,22 +169,33 @@ render(){
         onChange={this.updateEnquiry} 
         />
         <label>Marketing</label>
-    {/* SOCIAL MEDIA */}
+    {/* SUPPORT */}
         <input type="radio" 
-        value= "socialmedia"
+        value= "support"
         name="enquiry"
-        checked={this.state.enquiry === "socialmedia"} 
+        checked={this.state.enquiry === "support"} 
         onChange={this.updateEnquiry} 
         />
-        <label>Social Media</label>
+        <label>Support</label>
+    </div>
+    {/* WHERE U HEAR US FROM */}
+    <div>
+        <label>Where Did You Hear us from where?: </label>
+          <select name="source" value={this.state.source}
+            onChange={this.updateSource}>
+            <option value="word-of-mouth">Word-of-Mouth</option>
+            <option value="Ads">Ads</option>
+            <option value="Social Media">Social Media</option>
+           <option value="Others">Others</option>
+          </select>
     </div>
     <div>
         
         {/* Important to have () in the function */}
     <button onClick={this.submit} disabled={this.checkIfDisabled()}>Submit</button>
     </div>
-
-
+    {/*putting the code below means it will appear below the button */}
+    {this.renderSummary()};
 
     </React.Fragment>
     );
