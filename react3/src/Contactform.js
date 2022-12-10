@@ -6,6 +6,9 @@
     // Step 5. Set Up 2-Way BINDING
     // Step 6. Set Up Submit Button
     // Step 7. Set Up Disabled for Submit
+    // Step 8. Set Up Render Summary in Render First
+    // Step 9. Create Function for Render Summary to check Btn Been Pressed
+    // Check and test often before large chunk of code
 
 import React from 'react';
 
