@@ -1,12 +1,12 @@
 
-import ContactForm from "./ContactForm";
-import FormCheckBox from "./FormCheckBox"
+import MallDirectory from "./MallDirectory";
 
 function App() {
   return (
     <div>
-      <ContactForm/>
-      <FormCheckBox/>
+      {/*<ContactForm/>
+      <FormCheckBox/> */}
+      <MallDirectory/>
     </div>
   );
 }
