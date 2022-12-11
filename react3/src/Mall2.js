@@ -16,11 +16,6 @@ import React from "react";
 export default class Mall2 extends React.Component {
 state = {
     // one array - event
-    events: [
-        "10% off at Coffee beans",
-        "Caroling at Don Don Donki",
-        "Free parking vouchers for spending above $100.00",
-    ],
     // one array - shops
     shops: [
         {
@@ -49,10 +44,9 @@ state = {
         "name":"Don Don Donki",
         "floor": 5,
         "unit":103,
-        "type":"Supermarket"
-        }
-        ]
-        ,
+        "type":"Supermarket",
+        },
+        ],
     };
 
 
@@ -66,17 +60,38 @@ state = {
     // USed by REACT for certain optimization such as CRUD
     renderShops() {
         let jsx = [];
+
+
+        /*
         for (let s of this.state.shops) {
         jsx.push(<div key={s.id}>
         <h3>{s.name}</h3>
-        <ul>
-        <li>Floor: {s.floor}</li>
-        <li>Unit: {s.unit}</li>
-        <li>Type: {s.type}</li>
-        </ul>
+        <h4>Unit: {s.floor}--{s.unit}</h4>
+        <strong>Type: </strong>{s.type}
         </div>)
         }
-        return jsx;
+        */
+
+        // upgrade to BOOTSTRAP
+
+        for (let shop of this.state.shops) {
+            jsx.push(
+            <div key={shop.id} className="card col-12 col-md-4 mb-3">
+                <div className="card-body">
+                    <h3 className="card-title">{shop.name}</h3>
+                    <div className="card-text">
+                        <h4>
+                            Unit: {shop.floor}-{shop.unit}
+                        </h4>
+                        <strong>Type: </strong>{shop.type}
+                    </div>
+                    </div>
+                </div>
+
+                //for loop
+        )}
+        return (<div className="row">{jsx}</div>);
+        // return our JSX content
         }
 
 
@@ -92,27 +107,34 @@ state = {
 
 render() {
     return <React.Fragment>
-        <h1>Mall Directory</h1>
+        <h1>ROSEWOOD Mall Directory</h1>
         <h2>Shops</h2>
         {/* 1. // we want everything inside a ul and tap on a function */}
             {this.renderShops()}
 
         {/*2. show events in a div  */}
-        <h2>Events</h2>
+        <h2>ROSEWOOD Mall Directory - using MAPPING</h2>
+        <div className="row">
         {
-            this.state.events.map((event) => (
-                <div
-                    style={{
-                        border: "1px solid black",
-                        margin: "5px",
-                        padding: "6px"
-                    }}
-                >
-                    {event}
+            // use MAP = for each shop, print out each and every one 
+            // and enclose it nicely with BOOTSTRAP card
+            this.state.shops.map((shop) => (
+                // INSERT KEY
+                <div key={shop.id} className="card col-12 col-md-4 mb-3">
+                <div className="card-body">
+                    <h3 className="card-title">{shop.name}</h3>
+                    <div className="card-text">
+                        <h4>
+                            Unit: {shop.floor}-{shop.unit}
+                        </h4>
+                        <strong>Type: </strong>{shop.type}
+                    </div>
+                    </div>
                 </div>
             ))   
+            
         }
-
+    </div>
     </React.Fragment>;
   }
 }

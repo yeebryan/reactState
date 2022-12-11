@@ -4,17 +4,14 @@
 // go to NODE_Module > bootstrap > dist > css > bootstrap.min.css
 // * NOTE WHENEVER We do a INSTALL, it will go under NODE_MODULE
 // IMPORT bootstrap
-
-import Mall2 from "./Mall2"
+import React from 'react'
+import Mall2 from './Mall2';
 import "bootstrap/dist/css/bootstrap.min.css"
-import MallDirectory from "./MallDirectory";
 
 function App() {
   return (
     <div>
-      {/*<ContactForm/>
-      <FormCheckBox/> */}
-      <MallDirectory/>
+      <Mall2/>
     </div>
   );
 }
