@@ -5,13 +5,15 @@
 // * NOTE WHENEVER We do a INSTALL, it will go under NODE_MODULE
 // IMPORT bootstrap
 import React from 'react'
-import Mall2 from './Mall2';
 import "bootstrap/dist/css/bootstrap.min.css"
+import Menu from './Menu';
+import Mall2 from './Mall2';
+import Mall3 from './Mall3';
 
 function App() {
   return (
-    <div>
-      <Mall2/>
+    <div className='container'>
+      <Mall3/>
     </div>
   );
 }
