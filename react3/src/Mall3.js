@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-// Client Search-bar
+// 7.3 Client Search-bar
 // Thought process
 // Step 1. Add Input Box for Search as part of UI
 // Step 2. Add in State >> key "searchTerms"
