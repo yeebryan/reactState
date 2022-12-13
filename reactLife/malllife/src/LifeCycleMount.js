@@ -1,9 +1,31 @@
-// 8.1 Component Lifecycle
+// DUMP LoadDate INTO ComponentDidMount
 
 // LOAD data through JSON / axios <SIMPLE>
 
 import React from 'react'
 import axios from 'axios'
+
+
+//* 
+// We need to load data dynamically before the page is fully rendered
+// this is where the react lifecycle comes in
+// we tap on componentDidMount() function
+// Once componentDidMount() "mounted", we can actually modify something
+// we can in every API calls inside componentDidMount before actual render happen
+// Makes it more natural before data fully loaded we can see it (esp when network slow)
+// HENCE, WHAT WE WANT TO IS LOADING STIMULATION (X)
+
+// [Lifecycle]
+// 1. Components are created through the constructor
+// What is constructor?
+// 2. Mounting is when component is ready
+// 3. Component is rendered once
+// 4. ComponentDidMount will be called (after component is rendered once)
+// --> It will never be called again
+// 5. Update is called
+// 6. Unmounting will be called (may happen)
+
+//*
 
 // Create JSON files shops.json & events.json in PUBLIC
 // load data with Axios (.JSON file)
@@ -11,7 +33,7 @@ import axios from 'axios'
 // import AXIOS
 
 // Create component, remember close bracket at the end
-export default class LifeCycle extends React.Component{
+export default class LifeCycleMount extends React.Component{
 
     state = {
         searchTerms: "",
@@ -22,7 +44,22 @@ export default class LifeCycle extends React.Component{
     // (async) function to load data from .json files dynamically
 
     loadData = async () => {
-        // either reference any kind of URL/file
+  
+    }
+
+    // dump LOADdata into componentDidMount
+    // cause we are using axios, we will make componentDidMount ASYNC
+    // When you stimulate 
+    // you should see that it is trying to load the axios call 1st (load....)
+    // First things are render (loading) > axios calls (arrays) > UI are updated
+    // We can only use if statement e.g., before data is loading... 
+    
+    // > Component Mount > Base Render > ComponentDidMount ... Axios Calls .. State Updated > Render
+    async componentDidMount(){
+        // place in all axios calls
+        console.log(".....load.....");
+
+              // either reference any kind of URL/file
         // if in terms of file -> put it into public folder
         // react will look into public folder if reference using relative pathing
         // e.g., </filename>
@@ -40,15 +77,29 @@ export default class LifeCycle extends React.Component{
         // setState itself is async function, take sometime to set State
         // accumulate setting of state together
         // do update of data of our UI in render
+        // update our state using setState for EVENTS
         this.setState({
             shops: shopResponse.data.shops,
             events: eventResponse.data.events
 
         })
-
-        // update our state using setState for EVENTS
-
     }
+
+
+
+
+    renderEvents(){
+        let elements = []; // simple array
+        // SIMPLE FOR LOOPS TO CYCLE THRU ALL STATE EVENTS
+        for(let eachEvent of this.state.events){
+            //push in some UI, can put in render instead
+            elements.push(<li className='list-group-item' key={eachEvent}>{eachEvent}</li>)
+        }
+
+        return (<ol className="list-group">{elements}</ol>)
+    }
+
+    // RENDER CORNER - UI
 
     render(){
         return (
@@ -73,6 +124,10 @@ export default class LifeCycle extends React.Component{
                         );
                     })
                 }
+                </div>
+                <div className="row">
+                    <h2>Events</h2>
+                    {this.renderEvents()} {/*ALWAYS CALL IT HENCE () */}
                 </div>
             </React.Fragment>
             )

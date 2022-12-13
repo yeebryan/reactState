@@ -6,12 +6,14 @@
 // IMPORT bootstrap
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import Lifecycle from './Lifecycle';
+import LifeCycle2 from './LifeCycle2';
+import LifeCycleMount from './LifeCycleMount';
+import LCMountData from './LCMountData';
 
 function App() {
   return (
     <div className='container'>
-      <Lifecycle/>
+      <LCMountData/>
     </div>
   );
 }
