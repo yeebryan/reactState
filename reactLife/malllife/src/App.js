@@ -9,11 +9,12 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import LifeCycle2 from './LifeCycle2';
 import LifeCycleMount from './LifeCycleMount';
 import LCMountData from './LCMountData';
+import LCMDPic from './LCMDPic';
 
 function App() {
   return (
     <div className='container'>
-      <LCMountData/>
+      <LCMDPic />
     </div>
   );
 }
