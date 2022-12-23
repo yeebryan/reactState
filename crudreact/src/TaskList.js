@@ -4,6 +4,7 @@
 // Ask user to 
 // (1) add LIST of TASKS (2) MARK THEM AS DONE (3) DELETE/CHANGE TASK'S DESCRIPTION
 
+
 import React from 'react'
 
 export default class TaskList extends React.Component{
@@ -16,8 +17,8 @@ state = {
     
         {
             id: 1,
-            description:'Walk the dog',
-            done:false
+            description:'Walk the dogs',
+            done:true
             },
             {
             id: 2,

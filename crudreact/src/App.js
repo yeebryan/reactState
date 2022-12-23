@@ -1,10 +1,10 @@
 import React from 'react'
-import TaskList from './TaskList'
+import TaskList2 from './TaskList2'
 
 function App(){
   return(
     <div>
-      <TaskList/>
+      <TaskList2/>
     </div>
   )
 }
