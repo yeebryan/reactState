@@ -94,7 +94,7 @@ async componentDidMount(){
         <React.Fragment>
                 <h1>TAKA Mall Directory</h1>
 
-            {/* SETUP OUR TENARY OPERATOR*/}
+            {/* SETUP OUR TERNARY OPERATOR*/}
             {
                 this.state.isDataLoaded ? (
                 <React.Fragment>

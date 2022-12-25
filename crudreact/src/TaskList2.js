@@ -186,7 +186,7 @@ updateFormField = (event) => {
 //CHECK TASK//
 // 
 //
-// checkboxed the task//
+// check boxed the task//
 // CHECK TASK function - arrow function since need event handler
 // HOWEVER unlike usual arrow functions, we are getting the task from the closure
 // Task derived from the checkbox onChange .. > closure function
@@ -286,7 +286,7 @@ beginEditTask = (task) => {
     // with eachTask is it current one being EDITED?
     // if not, just show normal UI
     // if yes, show a textbox
-    // setup tenary operator as if-else statement inside EDIT render button
+    // setup ternary operator as if-else statement inside EDIT render button
  })
 }
 
@@ -469,7 +469,7 @@ render(){
     // this is closure ->  onChange={() => {}}/>
     // onChange you have the expression but I also want to execute
     // -> this.checkTask(eachTask);  < this function also
-    // annoymous arrow function inside the closure function
+    // anonymous arrow function inside the closure function
     // -> this.checkTask(eachTask);  < this function also
     // this code will be sent to the checkTask function
     // go to checkTask to insert "eachTask" which is the 
